@@ -1,6 +1,6 @@
 require_dependency 'issue'
 
-module SerialNumberField
+#module SerialNumberField
   module IssuePatch
     extend ActiveSupport::Concern
 
@@ -9,6 +9,7 @@ module SerialNumberField
     end
 
     def assign_serial_number!
+      Rails.logger.info 'whatever'
       serial_number_fields.each do |cf|
         next if assigned_serial_number?(cf) && !copy?
 
@@ -16,7 +17,7 @@ module SerialNumberField
         new_serial_number = cf.format.generate_value(cf, self)
 
         if target_custom_value.present?
-          target_custom_value.update_attributes!(
+          target_custom_value.update(
             :value => new_serial_number)
         end
       end
@@ -39,8 +40,8 @@ module SerialNumberField
     end
 
   end
-end
+#end
 
-SerialNumberField::IssuePatch.tap do |mod|
+IssuePatch.tap do |mod|
   Issue.send :include, mod unless Issue.include?(mod)
 end

@@ -1,3 +1,7 @@
+## 4.0.0
+
+- Updated to include Redmine 5 support
+
 ## 3.0.0
 
 - Added ISO format #8 (@rambowm)

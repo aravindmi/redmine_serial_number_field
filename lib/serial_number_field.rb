@@ -7,8 +7,8 @@ module SerialNumberField
 end
 
 # Load patches for Redmine
-Rails.configuration.to_prepare do
-  Dir[SerialNumberField.root.join('app/patches/**/*_patch.rb')].each { |f| require_dependency f }
-end
+#Rails.application.config.to_prepare do
+Dir[SerialNumberField.root.join('app/patches/**/*_patch.rb')].each { |f| require_dependency f }
+#end
 
 Dir[SerialNumberField.root.join('app/hooks/**/*_hook.rb')].each { |f| require_dependency f }
