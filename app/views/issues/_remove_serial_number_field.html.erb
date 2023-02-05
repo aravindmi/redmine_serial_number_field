@@ -1,9 +1,23 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const elements = document.querySelectorAll('input.serial_number_cf');
-    elements.forEach(function(element, i) {
-      element.parentElement.remove();
-      //alert("its working");
-    });
+    hideSerialNumber();
   });
+   function hideSerialNumber() {
+      const elements = document.getElementsByClassName('serial_number_cf');
+      const inputElements = Array.prototype.filter.call(
+        elements,
+        (elements) => elements.nodeName === 'INPUT',
+      );
+
+      [...inputElements].forEach(function(element, i) {
+          element.parentElement.remove();
+          //alert("its working");
+      });
+    }
+   function hideSerialNumberAfterAjax() {
+      $(document).ajaxComplete(function () {
+        hideSerialNumber();
+      });
+   }
+  document.getElementById("issue_tracker_id").addEventListener("change", hideSerialNumberAfterAjax);  
 </script>
